@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustaining Intake Form | Rep Fitness</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <!-- Placeholder for Rep Fitness logo - replace src with actual logo path -->
+                <img src="REP_Logo_White_-_SMALL_4c295e27-ac03-4192-a40c-a8ae00a8bed3.webp" alt="Rep Fitness" class="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="logo-text" style="display:none;">REP FITNESS</span>
+            </div>
+            <h1>Sustaining Intake Form</h1>
+            <p class="subtitle">Engineering & Product Request Submission</p>
+        </header>
+
+        <!-- Progress Indicator -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="progress-text" id="progressText">0 of 12 fields completed</span>
+        </div>
+
+        <!-- Draft Status -->
+        <div class="draft-status" id="draftStatus">
+            <span class="draft-icon">&#128190;</span>
+            <span id="draftMessage">Draft auto-saved</span>
+        </div>
+
+        <!-- Form -->
+        <form id="intakeForm" novalidate>
+            <!-- Row 1: Basic Info -->
+            <section class="form-section">
+                <h2 class="section-title">
+                    <span class="section-number">1</span>
+                    Basic Information
+                </h2>
+                <div class="form-row four-col">
+                    <div class="form-group">
+                        <label for="requesterName">Requester Name <span class="required">*</span></label>
+                        <select id="requesterName" name="requesterName" required aria-describedby="requesterNameError">
+                            <option value="">Select requester...</option>
+                            <option value="Yoli Alrobei">Yoli Alrobei</option>
+                            <option value="Luis Ceballos">Luis Ceballos</option>
+                            <option value="Greg Dahlstrom">Greg Dahlstrom</option>
+                            <option value="Laura Doody-Bouwer">Laura Doody-Bouwer</option>
+                            <option value="Jason Fitzwater">Jason Fitzwater</option>
+                            <option value="Ed Flick">Ed Flick</option>
+                            <option value="Drew Forsterer">Drew Forsterer</option>
+                            <option value="Bryan Hamilton">Bryan Hamilton</option>
+                            <option value="Jack Hibberts">Jack Hibberts</option>
+                            <option value="Joe Larson">Joe Larson</option>
+                            <option value="Jason Lazar">Jason Lazar</option>
+                            <option value="Joe Litchford">Joe Litchford</option>
+                            <option value="Ron Manzanares">Ron Manzanares</option>
+                            <option value="Haley Moe">Haley Moe</option>
+                            <option value="Jason Morgan">Jason Morgan</option>
+                            <option value="Jay Nedrow">Jay Nedrow</option>
+                            <option value="Keenen Peck-Valdivia">Keenen Peck-Valdivia</option>
+                            <option value="Ryan Pohl">Ryan Pohl</option>
+                            <option value="Chet Roe">Chet Roe</option>
+                            <option value="Alex Solome">Alex Solome</option>
+                            <option value="Joe Travers">Joe Travers</option>
+                            <option value="Brian Venturella">Brian Venturella</option>
+                            <option value="Daniel Wells">Daniel Wells</option>
+                            <option value="Mark Wilding">Mark Wilding</option>
+                        </select>
+                        <span class="error-message" id="requesterNameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title <span class="required">*</span></label>
+                        <input type="text" id="title" name="title" required
+                               placeholder="Enter title" aria-describedby="titleError">
+                        <span class="error-message" id="titleError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category <span class="required">*</span></label>
+                        <select id="category" name="category" required aria-describedby="categoryError">
+                            <option value="">Select category...</option>
+                            <option value="Feature Change">Feature Change</option>
+                            <option value="Spare Parts">Spare Parts</option>
+                            <option value="DWG Update">DWG Update</option>
+                            <option value="Vendor Request">Vendor Request</option>
+                            <option value="CR">Cost Reduction</option>
+                            <option value="Design Improvement">Design Improvement</option>
+                            <option value="2ND Source">2nd Source</option>
+                            <option value="2026 Roadmap">2026 Roadmap</option>
+                            <option value="Compliance">Compliance</option>
+                        </select>
+                        <span class="error-message" id="categoryError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="requestTitle">Request Title <span class="required">*</span></label>
+                        <input type="text" id="requestTitle" name="requestTitle" required
+                               placeholder="Brief description of request" aria-describedby="requestTitleError">
+                        <span class="error-message" id="requestTitleError"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Row 2: Problem & Action -->
+            <section class="form-section">
+                <h2 class="section-title">
+                    <span class="section-number">2</span>
+                    Problem & Requested Action
+                </h2>
+                <div class="form-row three-col">
+                    <div class="form-group">
+                        <label for="problem">Problem <span class="required">*</span></label>
+                        <textarea id="problem" name="problem" required rows="4"
+                                  placeholder="Describe the problem in detail" aria-describedby="problemError"></textarea>
+                        <span class="error-message" id="problemError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="requestedAction">Requested Action <span class="required">*</span></label>
+                        <textarea id="requestedAction" name="requestedAction" required rows="4"
+                                  placeholder="What action do you need taken?" aria-describedby="requestedActionError"></textarea>
+                        <span class="error-message" id="requestedActionError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="testingRequired">Testing Required <span class="required">*</span></label>
+                        <select id="testingRequired" name="testingRequired" required aria-describedby="testingRequiredError">
+                            <option value="">Select testing requirement...</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="TBD">TBD</option>
+                        </select>
+                        <span class="error-message" id="testingRequiredError"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Row 3: Suppliers & Cost -->
+            <section class="form-section">
+                <h2 class="section-title">
+                    <span class="section-number">3</span>
+                    Suppliers & Cost Information
+                </h2>
+                <div class="form-row three-col">
+                    <div class="form-group">
+                        <label for="suppliers">Suppliers <span class="required">*</span></label>
+                        <div class="multi-select-container" id="suppliersContainer">
+                            <div class="multi-select-display" id="suppliersDisplay" tabindex="0"
+                                 role="combobox" aria-expanded="false" aria-haspopup="listbox"
+                                 aria-describedby="suppliersError">
+                                <span class="placeholder">Select suppliers...</span>
+                            </div>
+                            <div class="multi-select-dropdown" id="suppliersDropdown" role="listbox" aria-multiselectable="true">
+                                <label class="multi-select-option">
+                                    <input type="checkbox" name="suppliers" value="Arcana Power">
+                                    <span>Arcana Power</span>
+                                </label>
+                                <label class="multi-select-option">
+                                    <input type="checkbox" name="suppliers" value="ATOP">
+                                    <span>ATOP</span>
+                                </label>
+                                <label class="multi-select-option">
+                                    <input type="checkbox" name="suppliers" value="Everesports">
+                                    <span>Everesports</span>
+                                </label>
+                                <label class="multi-select-option">
+                                    <input type="checkbox" name="suppliers" value="Grand Fitness">
+                                    <span>Grand Fitness</span>
+                                </label>
+                                <label class="multi-select-option">
+                                    <input type="checkbox" name="suppliers" value="Insight">
+                                    <span>Insight</span>
+                                </label>
+                                <label class="multi-select-option">
+                                    <input type="checkbox" name="suppliers" value="Iron Master">
+                                    <span>Iron Master</span>
+                                </label>
+                                <label class="multi-select-option">
+                                    <input type="checkbox" name="suppliers" value="Maite">
+                                    <span>Maite</span>
+                                </label>
+                                <label class="multi-select-option">
+                                    <input type="checkbox" name="suppliers" value="MKS">
+                                    <span>MKS</span>
+                                </label>
+                                <label class="multi-select-option">
+                                    <input type="checkbox" name="suppliers" value="Modun">
+                                    <span>Modun</span>
+                                </label>
+                                <label class="multi-select-option">
+                                    <input type="checkbox" name="suppliers" value="Not Selected">
+                                    <span>Not Selected</span>
+                                </label>
+                                <label class="multi-select-option">
+                                    <input type="checkbox" name="suppliers" value="SOPOP">
+                                    <span>SOPOP</span>
+                                </label>
+                                <label class="multi-select-option">
+                                    <input type="checkbox" name="suppliers" value="Sourcing (RFQ)">
+                                    <span>Sourcing (RFQ)</span>
+                                </label>
+                                <label class="multi-select-option">
+                                    <input type="checkbox" name="suppliers" value="Winning Rubber">
+                                    <span>Winning Rubber</span>
+                                </label>
+                                <label class="multi-select-option">
+                                    <input type="checkbox" name="suppliers" value="YL (PinLink)">
+                                    <span>YL (PinLink)</span>
+                                </label>
+                            </div>
+                        </div>
+                        <input type="hidden" id="suppliersHidden" name="suppliersSelected" required>
+                        <span class="error-message" id="suppliersError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="costImpact">Cost Impact <span class="required">*</span></label>
+                        <textarea id="costImpact" name="costImpact" required rows="4"
+                                  placeholder="Please provide a breakdown of cost per component"
+                                  aria-describedby="costImpactError"></textarea>
+                        <span class="error-message" id="costImpactError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="ecoReleaseDate">ECO Release Date <span class="required">*</span></label>
+                        <input type="date" id="ecoReleaseDate" name="ecoReleaseDate" required
+                               aria-describedby="ecoReleaseDateError">
+                        <span class="error-message" id="ecoReleaseDateError"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Row 4: Priority & Disposition -->
+            <section class="form-section">
+                <h2 class="section-title">
+                    <span class="section-number">4</span>
+                    Priority & Inventory Disposition
+                </h2>
+                <div class="form-row two-col">
+                    <div class="form-group">
+                        <label for="ecrPriority">ECR Priority <span class="required">*</span></label>
+                        <select id="ecrPriority" name="ecrPriority" required aria-describedby="ecrPriorityError">
+                            <option value="">Select priority...</option>
+                            <option value="Critical">Critical</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <span class="error-message" id="ecrPriorityError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inventoryDisposition">Inventory Disposition <span class="required">*</span></label>
+                        <select id="inventoryDisposition" name="inventoryDisposition" required
+                                aria-describedby="inventoryDispositionError">
+                            <option value="">Select disposition...</option>
+                            <option value="N/A">N/A</option>
+                            <option value="Scrap">Scrap</option>
+                            <option value="Use as is">Use as is</option>
+                            <option value="Rework">Rework</option>
+                            <option value="Return to Supplier">Return to Supplier</option>
+                            <option value="Running Change">Running Change</option>
+                        </select>
+                        <span class="error-message" id="inventoryDispositionError"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Form Actions -->
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="clearDraftBtn">
+                    Clear Draft
+                </button>
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                    <span class="btn-text">Submit Request</span>
+                    <span class="btn-loading" style="display:none;">
+                        <span class="spinner"></span>
+                        Submitting...
+                    </span>
+                </button>
+            </div>
+        </form>
+
+        <!-- Success Modal -->
+        <div class="modal" id="successModal" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+            <div class="modal-content">
+                <div class="modal-icon success">&#10003;</div>
+                <h2 id="successTitle">Request Submitted Successfully!</h2>
+                <p>Your request has been added to the Monday.com board.</p>
+                <div class="modal-link-container">
+                    <a href="#" id="mondayItemLink" target="_blank" rel="noopener noreferrer" class="monday-link">
+                        View in Monday.com &#8594;
+                    </a>
+                </div>
+                <button type="button" class="btn btn-primary" id="closeSuccessModal">
+                    Submit Another Request
+                </button>
+            </div>
+        </div>
+
+        <!-- Error Modal -->
+        <div class="modal" id="errorModal" role="dialog" aria-modal="true" aria-labelledby="errorTitle">
+            <div class="modal-content">
+                <div class="modal-icon error">&#10007;</div>
+                <h2 id="errorTitle">Submission Failed</h2>
+                <p id="errorMessage">An error occurred while submitting your request. Please try again.</p>
+                <button type="button" class="btn btn-primary" id="closeErrorModal">
+                    Try Again
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Rep Fitness. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
