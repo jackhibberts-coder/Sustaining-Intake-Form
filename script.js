@@ -21,7 +21,7 @@ const CONFIG = {
     AUTOSAVE_DELAY: 1000,
 
     // Total number of required fields
-    TOTAL_FIELDS: 12
+    TOTAL_FIELDS: 11
 };
 
 // ============================================
@@ -50,7 +50,6 @@ const suppliersHidden = document.getElementById('suppliersHidden');
 // ============================================
 const REQUIRED_FIELDS = [
     { id: 'requesterName', type: 'select', label: 'Requester Name' },
-    { id: 'title', type: 'text', label: 'Title' },
     { id: 'category', type: 'select', label: 'Category' },
     { id: 'requestTitle', type: 'text', label: 'Request Title' },
     { id: 'problem', type: 'textarea', label: 'Problem' },
@@ -467,7 +466,6 @@ async function submitToGoogleScript(formData) {
 function getFormData() {
     return {
         requesterName: document.getElementById('requesterName').value,
-        title: document.getElementById('title').value.trim(),
         category: document.getElementById('category').value,
         requestTitle: document.getElementById('requestTitle').value.trim(),
         problem: document.getElementById('problem').value.trim(),
