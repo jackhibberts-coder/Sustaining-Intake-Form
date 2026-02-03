@@ -1,0 +1,70 @@
+{
+  "templates": [
+    {
+      "id": "supplier-quote",
+      "name": "Supplier quote needed",
+      "description": "Please provide a quote for the component/change described. Include pricing, lead time, and MOQ.",
+      "suggestedTeams": ["Sourcing"]
+    },
+    {
+      "id": "quality-data",
+      "name": "Quality inspection data required",
+      "description": "Please provide inspection data, defect rates, or quality metrics for the relevant parts.",
+      "suggestedTeams": ["Quality"]
+    },
+    {
+      "id": "cad-review",
+      "name": "CAD model review needed",
+      "description": "Please review the CAD model and provide feedback on design feasibility and manufacturability.",
+      "suggestedTeams": ["NPI", "Drafting"]
+    },
+    {
+      "id": "product-specs",
+      "name": "Product specifications clarification",
+      "description": "Please clarify the product specifications and requirements for this change.",
+      "suggestedTeams": ["Product"]
+    },
+    {
+      "id": "testing-requirements",
+      "name": "Testing requirements clarification",
+      "description": "Please specify the testing requirements, test methods, and acceptance criteria.",
+      "suggestedTeams": ["NPI", "Quality"]
+    },
+    {
+      "id": "bom-verification",
+      "name": "BOM verification needed",
+      "description": "Please verify the Bill of Materials accuracy and identify any discrepancies.",
+      "suggestedTeams": ["NPI", "Drafting"]
+    },
+    {
+      "id": "cost-breakdown",
+      "name": "Cost breakdown required",
+      "description": "Please provide a detailed cost breakdown including materials, labor, and tooling.",
+      "suggestedTeams": ["Sourcing"]
+    },
+    {
+      "id": "timeline-leadtime",
+      "name": "Timeline/lead time information",
+      "description": "Please provide timeline and lead time information for completing this work.",
+      "suggestedTeams": ["Sourcing", "NPI"]
+    },
+    {
+      "id": "supplier-capability",
+      "name": "Supplier capability assessment",
+      "description": "Please assess the supplier's capability to meet the specified requirements.",
+      "suggestedTeams": ["Quality", "Sourcing"]
+    },
+    {
+      "id": "drawing-review",
+      "name": "Drawing review needed",
+      "description": "Please review the engineering drawings and provide feedback or corrections.",
+      "suggestedTeams": ["Drafting", "NPI"]
+    },
+    {
+      "id": "custom",
+      "name": "Custom request",
+      "description": "",
+      "suggestedTeams": []
+    }
+  ]
+}

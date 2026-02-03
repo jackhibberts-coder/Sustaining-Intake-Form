@@ -1,0 +1,32 @@
+{
+  "owners": [
+    { "name": "Joe Litchford", "email": "joel2@repfitness.com", "team": "Quality" },
+    { "name": "Dan Wells", "email": "danw@repfitness.com", "team": "Quality" },
+    { "name": "Allen Shen", "email": "allens@repfitness.com", "team": "Quality" },
+    { "name": "Shuailei Huang", "email": "ShuaileiS@repfitness.com", "team": "Quality" },
+    { "name": "Ammy Guan", "email": "AmmyG@repfitness.com", "team": "Quality" },
+    { "name": "Gray Li", "email": "GrayL@repfitness.com", "team": "Quality" },
+    { "name": "Leon Zhang", "email": "LeonZ@repfitness.com", "team": "Quality" },
+    { "name": "John Yao", "email": "JohnY@repfitness.com", "team": "Quality" },
+    { "name": "Ryan Shi", "email": "RyanS@repfitness.com", "team": "Quality" },
+    { "name": "Ken Liao", "email": "KenL@repfitness.com", "team": "Quality" },
+    { "name": "Kent Lin", "email": "KentL@repfitness.com", "team": "Quality" },
+    { "name": "Jason Lazar", "email": "JasonL@repfitness.com", "team": "Product" },
+    { "name": "Keenen Peck-Valdivia", "email": "KeenenP@repfitness.com", "team": "Product" },
+    { "name": "Laura Doody-Bouwer", "email": "LauraD@repfitness.com", "team": "Product" },
+    { "name": "Haley Moe", "email": "HaleyM@repfitness.com", "team": "Product" },
+    { "name": "Greg Dahlstrom", "email": "GregD@repfitness.com", "team": "Sourcing" },
+    { "name": "Joe Lin", "email": "JoeL@repfitness.com", "team": "Sourcing" },
+    { "name": "Ellan Zhang", "email": "EllanZ@repfitness.com", "team": "Sourcing" },
+    { "name": "Bryan Hamilton", "email": "BryanH@repfitness.com", "team": "NPI" },
+    { "name": "Joe Larson", "email": "JosephL@repfitness.com", "team": "NPI" },
+    { "name": "Mark Wilding", "email": "MarkW@repfitness.com", "team": "NPI" },
+    { "name": "Jason Fitzwater", "email": "JasonF@repfitness.com", "team": "NPI" },
+    { "name": "Jay Nedrow", "email": "JayN@repfitness.com", "team": "NPI" },
+    { "name": "Chet Roe", "email": "ChetR@repfitness.com", "team": "NPI" },
+    { "name": "Drew Forsterer", "email": "DrewF@repfitness.com", "team": "Drafting" },
+    { "name": "Ron Manzanares", "email": "RonM@repfitness.com", "team": "Drafting" },
+    { "name": "Jason Morgan", "email": "JasonM@repfitness.com", "team": "Sustaining" },
+    { "name": "Alex Solome", "email": "alexs2@repfitness.com", "team": "Tech Writing" }
+  ]
+}

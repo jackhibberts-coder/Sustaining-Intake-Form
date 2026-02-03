@@ -1,0 +1,76 @@
+{
+  "templates": [
+    {
+      "id": "quote-supplier",
+      "name": "Request quote from supplier",
+      "description": "Get pricing/quote from supplier for the required components or changes",
+      "suggestedTeams": ["Sourcing"]
+    },
+    {
+      "id": "create-cad",
+      "name": "Create/update CAD model",
+      "description": "Create new or update existing CAD model for the design change",
+      "suggestedTeams": ["NPI", "Drafting"]
+    },
+    {
+      "id": "update-drawing",
+      "name": "Update drawing",
+      "description": "Update engineering drawings to reflect the design change",
+      "suggestedTeams": ["Drafting"]
+    },
+    {
+      "id": "test-prototype",
+      "name": "Test prototype",
+      "description": "Conduct testing on prototype to validate the change",
+      "suggestedTeams": ["NPI", "Quality"]
+    },
+    {
+      "id": "write-test-report",
+      "name": "Write test report",
+      "description": "Document test results and findings in a formal report",
+      "suggestedTeams": ["NPI", "Quality"]
+    },
+    {
+      "id": "update-bom",
+      "name": "Update BOM",
+      "description": "Update Bill of Materials to reflect component changes",
+      "suggestedTeams": ["NPI", "Drafting"]
+    },
+    {
+      "id": "quality-inspection",
+      "name": "Quality inspection",
+      "description": "Perform quality inspection on parts or assemblies",
+      "suggestedTeams": ["Quality"]
+    },
+    {
+      "id": "supplier-communication",
+      "name": "Supplier communication",
+      "description": "Coordinate with supplier on specifications or requirements",
+      "suggestedTeams": ["Sourcing", "Quality"]
+    },
+    {
+      "id": "product-review",
+      "name": "Product review",
+      "description": "Review change for product fit and market impact",
+      "suggestedTeams": ["Product"]
+    },
+    {
+      "id": "update-documentation",
+      "name": "Update documentation",
+      "description": "Update user manuals, assembly instructions, or other documentation",
+      "suggestedTeams": ["Tech Writing"]
+    },
+    {
+      "id": "create-eco",
+      "name": "Create ECO",
+      "description": "Create Engineering Change Order to formalize the change",
+      "suggestedTeams": ["Sustaining", "NPI"]
+    },
+    {
+      "id": "custom",
+      "name": "Custom task",
+      "description": "Custom task - specify details",
+      "suggestedTeams": []
+    }
+  ]
+}

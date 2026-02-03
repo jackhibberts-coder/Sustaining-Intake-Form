@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Request Response | Rep Fitness</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="respond.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <img src="REP_Logo_White_-_SMALL_4c295e27-ac03-4192-a40c-a8ae00a8bed3.webp" alt="Rep Fitness" class="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="logo-text" style="display:none;">REP FITNESS</span>
+            </div>
+            <h1>Information Request</h1>
+            <p class="subtitle">Sustaining Engineering Response Form</p>
+        </header>
+
+        <!-- Loading State -->
+        <div class="loading-container" id="loadingContainer">
+            <div class="loading-spinner"></div>
+            <p>Loading request...</p>
+        </div>
+
+        <!-- Error State -->
+        <div class="error-container" id="errorContainer" style="display: none;">
+            <div class="error-icon">!</div>
+            <h2>Unable to Load Request</h2>
+            <p id="errorText">The information request could not be found or has already been completed.</p>
+        </div>
+
+        <!-- Response Form -->
+        <div class="response-view" id="responseView" style="display: none;">
+            <!-- Project Context -->
+            <section class="form-section context-section">
+                <h2 class="section-title">
+                    <span class="section-number">1</span>
+                    Project Context
+                </h2>
+                <div class="context-grid">
+                    <div class="context-item">
+                        <span class="label">Request Title</span>
+                        <span class="value" id="contextTitle"></span>
+                    </div>
+                    <div class="context-item">
+                        <span class="label">Requester</span>
+                        <span class="value" id="contextRequester"></span>
+                    </div>
+                    <div class="context-item">
+                        <span class="label">Category</span>
+                        <span class="value" id="contextCategory"></span>
+                    </div>
+                </div>
+                <div class="context-detail">
+                    <label>Problem Description</label>
+                    <div class="detail-value" id="contextProblem"></div>
+                </div>
+                <div class="context-detail">
+                    <label>Requested Action</label>
+                    <div class="detail-value" id="contextAction"></div>
+                </div>
+            </section>
+
+            <!-- Information Request -->
+            <section class="form-section request-section">
+                <h2 class="section-title">
+                    <span class="section-number">2</span>
+                    Information Requested
+                </h2>
+                <div class="request-question" id="requestQuestion"></div>
+                <div class="request-meta">
+                    <span id="requestAssignedTo"></span>
+                </div>
+            </section>
+
+            <!-- Response Form -->
+            <section class="form-section">
+                <h2 class="section-title">
+                    <span class="section-number">3</span>
+                    Your Response
+                </h2>
+                <form id="responseForm" novalidate>
+                    <div class="form-group">
+                        <label for="responderName">Your Name <span class="required">*</span></label>
+                        <input type="text" id="responderName" name="responderName" required
+                               placeholder="Enter your name" aria-describedby="responderNameError">
+                        <span class="error-message" id="responderNameError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="responderEmail">Your Email <span class="required">*</span></label>
+                        <input type="email" id="responderEmail" name="responderEmail" required
+                               placeholder="Enter your email" aria-describedby="responderEmailError">
+                        <span class="error-message" id="responderEmailError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="responseText">Response <span class="required">*</span></label>
+                        <textarea id="responseText" name="responseText" required rows="6"
+                                  placeholder="Provide your response to the information request..."
+                                  aria-describedby="responseTextError"></textarea>
+                        <span class="error-message" id="responseTextError"></span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <span class="btn-text">Submit Response</span>
+                            <span class="btn-loading" style="display:none;">
+                                <span class="spinner"></span>
+                                Submitting...
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Previous Responses -->
+            <section class="form-section" id="previousResponsesSection" style="display: none;">
+                <h2 class="section-title">
+                    <span class="section-number">4</span>
+                    Previous Responses
+                </h2>
+                <div class="previous-responses" id="previousResponses"></div>
+            </section>
+        </div>
+
+        <!-- Success View -->
+        <div class="success-view" id="successView" style="display: none;">
+            <div class="success-content">
+                <div class="success-icon">&#10003;</div>
+                <h2>Response Submitted Successfully!</h2>
+                <p>Thank you for providing this information. The engineer has been notified.</p>
+                <p class="success-note">You can close this window.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Rep Fitness. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="respond.js"></script>
+</body>
+</html>

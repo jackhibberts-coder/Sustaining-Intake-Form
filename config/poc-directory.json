@@ -1,0 +1,62 @@
+{
+  "teams": {
+    "Quality": {
+      "members": [
+        { "name": "Joe Litchford", "email": "joel2@repfitness.com" },
+        { "name": "Dan Wells", "email": "danw@repfitness.com" },
+        { "name": "Allen Shen", "email": "allens@repfitness.com" },
+        { "name": "Shuailei Huang", "email": "ShuaileiS@repfitness.com" },
+        { "name": "Ammy Guan", "email": "AmmyG@repfitness.com" },
+        { "name": "Gray Li", "email": "GrayL@repfitness.com" },
+        { "name": "Leon Zhang", "email": "LeonZ@repfitness.com" },
+        { "name": "John Yao", "email": "JohnY@repfitness.com" },
+        { "name": "Ryan Shi", "email": "RyanS@repfitness.com" },
+        { "name": "Ken Liao", "email": "KenL@repfitness.com" },
+        { "name": "Kent Lin", "email": "KentL@repfitness.com" }
+      ]
+    },
+    "Product": {
+      "members": [
+        { "name": "Jason Lazar", "email": "JasonL@repfitness.com" },
+        { "name": "Keenen Peck-Valdivia", "email": "KeenenP@repfitness.com" },
+        { "name": "Laura Doody-Bouwer", "email": "LauraD@repfitness.com" }
+      ]
+    },
+    "Sourcing": {
+      "members": [
+        { "name": "Greg Dahlstrom", "email": "GregD@repfitness.com" },
+        { "name": "Joe Lin", "email": "JoeL@repfitness.com" },
+        { "name": "Ellan Zhang", "email": "EllanZ@repfitness.com" }
+      ]
+    },
+    "NPI": {
+      "members": [
+        { "name": "Bryan Hamilton", "email": "BryanH@repfitness.com" },
+        { "name": "Joe Larson", "email": "JosephL@repfitness.com" },
+        { "name": "Mark Wilding", "email": "MarkW@repfitness.com" },
+        { "name": "Jason Fitzwater", "email": "JasonF@repfitness.com" },
+        { "name": "Jay Nedrow", "email": "JayN@repfitness.com" },
+        { "name": "Chet Roe", "email": "ChetR@repfitness.com" }
+      ]
+    },
+    "Drafting": {
+      "members": [
+        { "name": "Drew Forsterer", "email": "DrewF@repfitness.com" },
+        { "name": "Ron Manzanares", "email": "RonM@repfitness.com" }
+      ]
+    },
+    "Sustaining": {
+      "members": [
+        { "name": "Jason Morgan", "email": "JasonM@repfitness.com" }
+      ]
+    },
+    "Tech Writing": {
+      "members": [
+        { "name": "Alex Solome", "email": "alexs2@repfitness.com" }
+      ]
+    }
+  },
+  "engineers": [
+    { "name": "Jack Hibberts", "email": "JackH@repfitness.com" }
+  ]
+}

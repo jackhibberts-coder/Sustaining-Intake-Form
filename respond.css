@@ -1,0 +1,215 @@
+/* ============================================
+   Response Form Styles
+   ============================================ */
+
+/* Loading & Error States */
+.loading-container,
+.error-container {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--color-secondary);
+    border-radius: var(--radius-lg);
+    margin-bottom: 2rem;
+}
+
+.loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--color-gray-200);
+    border-top-color: var(--color-accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+.error-icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(220, 38, 38, 0.1);
+    color: var(--color-error);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.error-container h2 {
+    margin-bottom: 0.5rem;
+}
+
+.error-container p {
+    color: var(--color-gray-600);
+}
+
+/* Context Section */
+.context-section {
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-gray-100) 100%);
+}
+
+.context-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .context-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.context-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.context-item .label {
+    font-size: 0.75rem;
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.context-item .value {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-primary);
+}
+
+.context-detail {
+    margin-bottom: 1rem;
+}
+
+.context-detail:last-child {
+    margin-bottom: 0;
+}
+
+.context-detail label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.detail-value {
+    background: var(--color-secondary);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-primary);
+    white-space: pre-wrap;
+    border: 1px solid var(--color-gray-200);
+}
+
+/* Request Section */
+.request-section {
+    border-left: 4px solid var(--color-accent);
+}
+
+.request-question {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    background: var(--color-gray-100);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1rem;
+}
+
+.request-meta {
+    font-size: 0.875rem;
+    color: var(--color-gray-500);
+}
+
+/* Previous Responses */
+.previous-responses {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.previous-response {
+    background: var(--color-gray-100);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--color-success);
+}
+
+.previous-response-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.previous-response-name {
+    font-weight: 500;
+    color: var(--color-primary);
+}
+
+.previous-response-date {
+    color: var(--color-gray-500);
+}
+
+.previous-response-text {
+    color: var(--color-gray-700);
+    white-space: pre-wrap;
+}
+
+/* Success View */
+.success-view {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.success-content {
+    background: var(--color-secondary);
+    padding: 3rem 2rem;
+    border-radius: var(--radius-lg);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(22, 163, 74, 0.1);
+    color: var(--color-success);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2.5rem;
+}
+
+.success-content h2 {
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+}
+
+.success-content p {
+    color: var(--color-gray-600);
+    margin-bottom: 0.5rem;
+}
+
+.success-note {
+    font-size: 0.875rem;
+    color: var(--color-gray-400);
+    margin-top: 1.5rem;
+}
+
+/* Form Overrides */
+.response-view .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.response-view textarea {
+    min-height: 150px;
+}

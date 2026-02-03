@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineer Review | Sustaining Intake Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="review.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <img src="REP_Logo_White_-_SMALL_4c295e27-ac03-4192-a40c-a8ae00a8bed3.webp" alt="Rep Fitness" class="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="logo-text" style="display:none;">REP FITNESS</span>
+            </div>
+            <h1>Engineer Review</h1>
+            <p class="subtitle">Sustaining Engineering Request Triage</p>
+        </header>
+
+        <!-- Loading State -->
+        <div class="loading-container" id="loadingContainer">
+            <div class="loading-spinner"></div>
+            <p>Loading request data...</p>
+        </div>
+
+        <!-- Error State -->
+        <div class="error-container" id="errorContainer" style="display: none;">
+            <div class="error-icon">!</div>
+            <h2>Unable to Load Request</h2>
+            <p id="errorText">The requested data packet could not be found.</p>
+            <a href="review.html" class="btn btn-primary">Back to Dashboard</a>
+        </div>
+
+        <!-- Dashboard View (when no packet ID) -->
+        <div class="dashboard-view" id="dashboardView" style="display: none;">
+            <section class="form-section">
+                <h2 class="section-title">
+                    <span class="section-number">1</span>
+                    Pending Requests
+                </h2>
+                <div class="packets-list" id="pendingPacketsList">
+                    <p class="empty-state">No pending requests</p>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <h2 class="section-title">
+                    <span class="section-number">2</span>
+                    Waiting for Information
+                </h2>
+                <div class="packets-list" id="waitingPacketsList">
+                    <p class="empty-state">No requests waiting for information</p>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <h2 class="section-title">
+                    <span class="section-number">3</span>
+                    In Review
+                </h2>
+                <div class="packets-list" id="inReviewPacketsList">
+                    <p class="empty-state">No requests in review</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Review View (when packet ID provided) -->
+        <div class="review-view" id="reviewView" style="display: none;">
+            <!-- Request Summary -->
+            <section class="form-section">
+                <div class="section-header-row">
+                    <h2 class="section-title">
+                        <span class="section-number">1</span>
+                        Request Summary
+                    </h2>
+                    <span class="status-badge" id="statusBadge">Pending</span>
+                </div>
+
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="label">Request Title</span>
+                        <span class="value" id="summaryTitle"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Requester</span>
+                        <span class="value" id="summaryRequester"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Category</span>
+                        <span class="value" id="summaryCategory"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Priority</span>
+                        <span class="value" id="summaryPriority"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Submitted</span>
+                        <span class="value" id="summarySubmitted"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">ECO Release Date</span>
+                        <span class="value" id="summaryEcoDate"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Full Details -->
+            <section class="form-section collapsible">
+                <h2 class="section-title collapsible-header" data-target="detailsContent">
+                    <span class="section-number">2</span>
+                    Full Details
+                    <span class="collapse-icon">&#9660;</span>
+                </h2>
+                <div class="collapsible-content" id="detailsContent">
+                    <div class="detail-group">
+                        <label>Problem</label>
+                        <div class="detail-value" id="detailProblem"></div>
+                    </div>
+                    <div class="detail-group">
+                        <label>Requested Action</label>
+                        <div class="detail-value" id="detailAction"></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-group">
+                            <label>Testing Required</label>
+                            <div class="detail-value" id="detailTesting"></div>
+                        </div>
+                        <div class="detail-group">
+                            <label>Suppliers</label>
+                            <div class="detail-value" id="detailSuppliers"></div>
+                        </div>
+                        <div class="detail-group">
+                            <label>Inventory Disposition</label>
+                            <div class="detail-value" id="detailDisposition"></div>
+                        </div>
+                    </div>
+                    <div class="detail-group">
+                        <label>Cost Impact</label>
+                        <div class="detail-value" id="detailCost"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Info Requests (if any) -->
+            <section class="form-section" id="infoRequestsSection" style="display: none;">
+                <h2 class="section-title">
+                    <span class="section-number">3</span>
+                    Information Requests &amp; Responses
+                </h2>
+                <div class="info-requests-list" id="infoRequestsList"></div>
+            </section>
+
+            <!-- Decision Section -->
+            <section class="form-section">
+                <h2 class="section-title">
+                    <span class="section-number" id="decisionSectionNum">3</span>
+                    Triage Decision
+                </h2>
+                <div class="decision-buttons">
+                    <button type="button" class="btn btn-large btn-success" id="proceedBtn">
+                        <span class="btn-icon">&#10003;</span>
+                        Proceed to Monday.com
+                    </button>
+                    <button type="button" class="btn btn-large btn-warning" id="requestInfoBtn">
+                        <span class="btn-icon">?</span>
+                        Request More Information
+                    </button>
+                </div>
+            </section>
+
+            <!-- Request Info Panel (hidden by default) -->
+            <section class="form-section action-panel" id="requestInfoPanel" style="display: none;">
+                <h2 class="section-title">
+                    <span class="section-number">4</span>
+                    Request Information
+                </h2>
+                <p class="section-description">Add information requests and assign team members to provide the needed information.</p>
+
+                <div class="info-request-builder" id="infoRequestBuilder">
+                    <!-- Dynamic info request items will be added here -->
+                </div>
+
+                <button type="button" class="btn btn-secondary btn-add" id="addInfoRequestBtn">
+                    + Add Information Request
+                </button>
+
+                <div class="panel-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelInfoRequestBtn">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="submitInfoRequestBtn">Send Information Requests</button>
+                </div>
+            </section>
+
+            <!-- Proceed Panel (hidden by default) -->
+            <section class="form-section action-panel" id="proceedPanel" style="display: none;">
+                <h2 class="section-title">
+                    <span class="section-number">4</span>
+                    Create Subitems
+                </h2>
+                <p class="section-description">Add subitems/tasks for this request before pushing to Monday.com.</p>
+
+                <div class="subitem-builder" id="subitemBuilder">
+                    <!-- Dynamic subitem items will be added here -->
+                </div>
+
+                <button type="button" class="btn btn-secondary btn-add" id="addSubitemBtn">
+                    + Add Subitem
+                </button>
+
+                <div class="panel-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelProceedBtn">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="pushToMondayBtn">Push to Monday.com</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Rep Fitness. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal" role="dialog" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-icon success">&#10003;</div>
+            <h2 id="successTitle">Success!</h2>
+            <p id="successMessage"></p>
+            <button type="button" class="btn btn-primary" id="closeSuccessModal">OK</button>
+        </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div class="modal" id="confirmModal" role="dialog" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-icon warning">!</div>
+            <h2 id="confirmTitle">Confirm Action</h2>
+            <p id="confirmMessage"></p>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="cancelConfirmBtn">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="review.js"></script>
+</body>
+</html>
