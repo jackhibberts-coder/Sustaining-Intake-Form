@@ -7,9 +7,8 @@
 // CONFIGURATION - UPDATE THESE VALUES
 // ============================================
 const CONFIG = {
-    // Google Apps Script Web App URL (deployed as web app)
-    // Replace with your actual deployment URL after deploying Code.gs
-    GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxPURU2dD3o13f-SiCSZcZcBTjjw3NjwBzLIyBgsDnSP6Om4g1GpNWYXvyW-QnQ726C/exec',
+    // N8N Webhook URL
+    API_URL: 'https://n8n.repfitness.io/webhook-test/sustaining-api',
 
     // Monday.com board URL base (for success link)
     MONDAY_BOARD_URL: 'https://rep-fitness.monday.com/boards/8281967707/views/200096331',
@@ -410,8 +409,8 @@ async function handleSubmit(e) {
     const formData = getFormData();
 
     try {
-        // Submit to Google Apps Script
-        const response = await submitToGoogleScript(formData);
+        // Submit to n8n Webhook
+        const response = await submitToApi(formData);
 
         if (response.success) {
             // Clear draft
@@ -438,23 +437,23 @@ async function handleSubmit(e) {
     }
 }
 
-async function submitToGoogleScript(formData) {
-    // Check if URL is configured
-    if (CONFIG.GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
-        throw new Error('Google Apps Script URL not configured. Please update CONFIG.GOOGLE_SCRIPT_URL in script.js');
+async function submitToApi(formData) {
+    if (!CONFIG.API_URL) {
+        throw new Error('API URL not configured.');
     }
 
     try {
-        const response = await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
+        const response = await fetch(CONFIG.API_URL, {
             method: 'POST',
             headers: {
-                'Content-Type': 'text/plain;charset=utf-8',
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(formData),
-            redirect: 'follow'
+            body: JSON.stringify({
+                action: 'submitIntake',
+                ...formData
+            })
         });
 
-        // Google Apps Script redirects to googleusercontent.com for the response
         const result = await response.json();
         return result;
     } catch (error) {
