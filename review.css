@@ -2,6 +2,62 @@
    Engineer Review Interface Styles
    ============================================ */
 
+/* Navigation Bar */
+.review-nav {
+    background: var(--color-secondary);
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    transition: background-color var(--transition-fast);
+}
+
+.nav-back-link:hover {
+    background: var(--color-gray-100);
+}
+
+.nav-back-link .back-arrow {
+    font-size: 1rem;
+}
+
+.nav-separator {
+    color: var(--color-gray-300);
+    font-size: 1.25rem;
+}
+
+.nav-title {
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 1rem;
+}
+
+.nav-packet-title {
+    color: var(--color-gray-600);
+    font-size: 0.875rem;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 /* Loading & Error States */
 .loading-container,
 .error-container {

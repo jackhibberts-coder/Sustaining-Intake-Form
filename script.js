@@ -569,3 +569,53 @@ function getTimeAgo(date) {
     if (seconds < 86400) return `${Math.floor(seconds / 3600)} hours ago`;
     return `${Math.floor(seconds / 86400)} days ago`;
 }
+
+// ============================================
+// ENGINEER ACCESS
+// ============================================
+const engineerAccessLink = document.getElementById('engineerAccessLink');
+const engineerAccessModal = document.getElementById('engineerAccessModal');
+const engineerPassword = document.getElementById('engineerPassword');
+const passwordError = document.getElementById('passwordError');
+const cancelEngineerAccess = document.getElementById('cancelEngineerAccess');
+const submitEngineerAccess = document.getElementById('submitEngineerAccess');
+
+if (engineerAccessLink) {
+    engineerAccessLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(engineerAccessModal);
+        engineerPassword.value = '';
+        passwordError.textContent = '';
+        engineerPassword.focus();
+    });
+}
+
+if (cancelEngineerAccess) {
+    cancelEngineerAccess.addEventListener('click', () => {
+        closeModal(engineerAccessModal);
+    });
+}
+
+if (submitEngineerAccess) {
+    submitEngineerAccess.addEventListener('click', checkEngineerPassword);
+}
+
+if (engineerPassword) {
+    engineerPassword.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            checkEngineerPassword();
+        }
+    });
+}
+
+function checkEngineerPassword() {
+    const password = engineerPassword.value.trim();
+
+    if (password === 'Intake') {
+        window.location.href = 'review.html';
+    } else {
+        passwordError.textContent = 'Incorrect password. Please try again.';
+        engineerPassword.value = '';
+        engineerPassword.focus();
+    }
+}

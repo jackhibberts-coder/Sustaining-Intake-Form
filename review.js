@@ -31,6 +31,10 @@ const dashboardView = document.getElementById('dashboardView');
 const reviewView = document.getElementById('reviewView');
 const errorText = document.getElementById('errorText');
 
+// Navigation Elements
+const reviewNav = document.getElementById('reviewNav');
+const navContent = document.getElementById('navContent');
+
 // Review View Elements
 const statusBadge = document.getElementById('statusBadge');
 const proceedBtn = document.getElementById('proceedBtn');
@@ -180,6 +184,9 @@ async function loadPacket(packetId) {
 
 function renderPacketReview() {
     const form = currentPacket.formData;
+
+    // Update navigation bar for packet view
+    updateNavigation(form.requestTitle);
 
     // Update status badge
     statusBadge.textContent = formatStatus(currentPacket.status);
@@ -660,6 +667,26 @@ async function pushToMonday() {
         alert('Error: ' + error.message);
         document.getElementById('pushToMondayBtn').disabled = false;
         document.getElementById('pushToMondayBtn').textContent = 'Push to Monday.com';
+    }
+}
+
+// ============================================
+// NAVIGATION FUNCTIONS
+// ============================================
+function updateNavigation(packetTitle = null) {
+    if (packetTitle) {
+        // Viewing a specific packet - show back link and title
+        navContent.innerHTML = `
+            <a href="review.html" class="nav-back-link">
+                <span class="back-arrow">&larr;</span>
+                Back to Dashboard
+            </a>
+            <span class="nav-separator">/</span>
+            <span class="nav-packet-title" title="${escapeHtml(packetTitle)}">${escapeHtml(packetTitle)}</span>
+        `;
+    } else {
+        // Dashboard view
+        navContent.innerHTML = '<span class="nav-title">Review Dashboard</span>';
     }
 }
 

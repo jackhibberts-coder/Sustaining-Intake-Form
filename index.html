@@ -308,7 +308,25 @@
         <!-- Footer -->
         <footer class="footer">
             <p>&copy; 2025 Rep Fitness. All rights reserved.</p>
+            <a href="#" class="engineer-access-link" id="engineerAccessLink">Engineer Access</a>
         </footer>
+    </div>
+
+    <!-- Engineer Access Modal -->
+    <div class="modal" id="engineerAccessModal" role="dialog" aria-modal="true" aria-labelledby="engineerAccessTitle">
+        <div class="modal-content">
+            <div class="modal-icon">&#128274;</div>
+            <h2 id="engineerAccessTitle">Engineer Access</h2>
+            <p>Enter password to access the review dashboard.</p>
+            <div class="password-input-container">
+                <input type="password" id="engineerPassword" placeholder="Enter password" aria-label="Password">
+                <span class="password-error" id="passwordError"></span>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="cancelEngineerAccess">Cancel</button>
+                <button type="button" class="btn btn-primary" id="submitEngineerAccess">Access Dashboard</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

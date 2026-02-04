@@ -72,6 +72,10 @@ function doGet(e) {
         return handleGetConfig(e.parameter.type);
       case 'getInfoRequest':
         return handleGetInfoRequest(e.parameter.packetId, e.parameter.requestId);
+      case 'getUnsentInfoRequests':
+        return handleGetUnsentInfoRequests();
+      case 'getUnsentNotifications':
+        return handleGetUnsentNotifications();
       default:
         return createResponse(true, null, null, {
           status: 'OK',
@@ -104,6 +108,10 @@ function doPost(e) {
         return handleSubmitResponse(payload);
       case 'approveAndPush':
         return handleApproveAndPush(payload);
+      case 'markInfoRequestEmailed':
+        return handleMarkInfoRequestEmailed(payload);
+      case 'markResponseNotificationEmailed':
+        return handleMarkResponseNotificationEmailed(payload);
       default:
         return createResponse(false, null, 'Unknown action: ' + action);
     }
@@ -417,7 +425,8 @@ function handleSubmitInfoRequest(payload) {
     assignedTo: req.assignedTo, // Array of { name, email }
     createdAt: new Date().toISOString(),
     responses: [],
-    status: 'pending'
+    status: 'pending',
+    emailSent: false  // Flag for tracking if email has been sent
   }));
 
   packet.infoRequests = [...packet.infoRequests, ...newRequests];
@@ -486,7 +495,8 @@ function handleSubmitResponse(payload) {
     respondedAt: new Date().toISOString(),
     responderName,
     responderEmail,
-    responseText
+    responseText,
+    notificationSent: false  // Flag for tracking if notification email has been sent
   });
 
   // Check if all assigned people have responded
@@ -516,6 +526,156 @@ function handleSubmitResponse(payload) {
   return createResponse(true, packetId, null, {
     message: 'Response recorded successfully'
   });
+}
+
+/**
+ * Handle get unsent info requests
+ * Returns all info requests where emailSent is false
+ */
+function handleGetUnsentInfoRequests() {
+  try {
+    const mainFolder = getOrCreateFolder('SustainingIntakePackets');
+    const waitingFolder = getOrCreateFolder('waiting', mainFolder);
+
+    const unsentRequests = [];
+    const files = waitingFolder.getFiles();
+
+    while (files.hasNext()) {
+      const file = files.next();
+      if (file.getName().endsWith('.json')) {
+        const packet = JSON.parse(file.getBlob().getDataAsString());
+
+        // Check for unsent info requests
+        if (packet.infoRequests && packet.infoRequests.length > 0) {
+          packet.infoRequests.forEach(req => {
+            if (!req.emailSent) {
+              unsentRequests.push({
+                packetId: packet.id,
+                requestId: req.id,
+                question: req.question,
+                assignedTo: req.assignedTo,
+                projectTitle: packet.formData.requestTitle,
+                requesterName: packet.formData.requesterName,
+                problem: packet.formData.problem,
+                requestedAction: packet.formData.requestedAction
+              });
+            }
+          });
+        }
+      }
+    }
+
+    return createResponse(true, null, null, { unsentRequests });
+  } catch (error) {
+    console.error('Error getting unsent info requests:', error);
+    return createResponse(false, null, error.message);
+  }
+}
+
+/**
+ * Handle get unsent response notifications
+ * Returns all responses where notificationSent is false
+ */
+function handleGetUnsentNotifications() {
+  try {
+    const mainFolder = getOrCreateFolder('SustainingIntakePackets');
+    const statuses = ['waiting', 'in-review'];
+
+    const unsentNotifications = [];
+
+    for (const status of statuses) {
+      const statusFolder = getOrCreateFolder(status, mainFolder);
+      const files = statusFolder.getFiles();
+
+      while (files.hasNext()) {
+        const file = files.next();
+        if (file.getName().endsWith('.json')) {
+          const packet = JSON.parse(file.getBlob().getDataAsString());
+
+          // Check for unsent response notifications
+          if (packet.infoRequests && packet.infoRequests.length > 0) {
+            packet.infoRequests.forEach(req => {
+              if (req.responses && req.responses.length > 0) {
+                req.responses.forEach((resp, respIndex) => {
+                  if (!resp.notificationSent) {
+                    unsentNotifications.push({
+                      packetId: packet.id,
+                      requestId: req.id,
+                      responseIndex: respIndex,
+                      responderName: resp.responderName,
+                      responderEmail: resp.responderEmail,
+                      responseText: resp.responseText,
+                      respondedAt: resp.respondedAt,
+                      question: req.question,
+                      projectTitle: packet.formData.requestTitle,
+                      requesterName: packet.formData.requesterName
+                    });
+                  }
+                });
+              }
+            });
+          }
+        }
+      }
+    }
+
+    return createResponse(true, null, null, { unsentNotifications });
+  } catch (error) {
+    console.error('Error getting unsent notifications:', error);
+    return createResponse(false, null, error.message);
+  }
+}
+
+/**
+ * Handle marking info request as emailed
+ */
+function handleMarkInfoRequestEmailed(payload) {
+  const { packetId, requestId } = payload;
+
+  const packet = getDataPacket(packetId);
+  if (!packet) {
+    return createResponse(false, null, 'Packet not found');
+  }
+
+  const requestIndex = packet.infoRequests.findIndex(r => r.id === requestId);
+  if (requestIndex === -1) {
+    return createResponse(false, null, 'Info request not found');
+  }
+
+  packet.infoRequests[requestIndex].emailSent = true;
+  packet.infoRequests[requestIndex].emailSentAt = new Date().toISOString();
+
+  saveDataPacket(packet);
+
+  return createResponse(true, packetId, null, { message: 'Info request marked as emailed' });
+}
+
+/**
+ * Handle marking response notification as emailed
+ */
+function handleMarkResponseNotificationEmailed(payload) {
+  const { packetId, requestId, responseIndex } = payload;
+
+  const packet = getDataPacket(packetId);
+  if (!packet) {
+    return createResponse(false, null, 'Packet not found');
+  }
+
+  const reqIndex = packet.infoRequests.findIndex(r => r.id === requestId);
+  if (reqIndex === -1) {
+    return createResponse(false, null, 'Info request not found');
+  }
+
+  if (!packet.infoRequests[reqIndex].responses[responseIndex]) {
+    return createResponse(false, null, 'Response not found');
+  }
+
+  packet.infoRequests[reqIndex].responses[responseIndex].notificationSent = true;
+  packet.infoRequests[reqIndex].responses[responseIndex].notificationSentAt = new Date().toISOString();
+
+  saveDataPacket(packet);
+
+  return createResponse(true, packetId, null, { message: 'Response notification marked as emailed' });
 }
 
 /**

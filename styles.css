@@ -609,6 +609,54 @@ select {
     font-size: 0.875rem;
 }
 
+.engineer-access-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: var(--color-gray-400);
+    text-decoration: none;
+    font-size: 0.75rem;
+    transition: color var(--transition-fast);
+}
+
+.engineer-access-link:hover {
+    color: var(--color-accent);
+}
+
+/* Password Input Container */
+.password-input-container {
+    margin-bottom: 1.5rem;
+}
+
+.password-input-container input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--color-gray-300);
+    border-radius: var(--radius-sm);
+    text-align: center;
+}
+
+.password-input-container input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(235, 86, 40, 0.15);
+}
+
+.password-error {
+    display: block;
+    color: var(--color-error);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    min-height: 1.25rem;
+}
+
+/* Modal Actions */
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
 /* Accessibility */
 .visually-hidden {
     position: absolute;
