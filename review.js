@@ -7,7 +7,7 @@
 // CONFIGURATION
 // ============================================
 const CONFIG = {
-    GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxPURU2dD3o13f-SiCSZcZcBTjjw3NjwBzLIyBgsDnSP6Om4g1GpNWYXvyW-QnQ726C/exec',
+    API_URL: 'https://n8n.repfitness.io/webhook-test/sustaining-api',
     MONDAY_BOARD_URL: 'https://rep-fitness.monday.com/boards/8281967707/views/200096331'
 };
 
@@ -72,8 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadConfigurations() {
     try {
-        const response = await fetch(`${CONFIG.GOOGLE_SCRIPT_URL}?action=getConfig`);
-        const data = await response.json();
+        const data = await fetchAPI('getConfig');
 
         if (data.success && data.configs) {
             pocDirectory = data.configs['poc-directory'];
@@ -121,8 +120,7 @@ async function loadDashboard() {
 
 async function fetchPackets(status) {
     try {
-        const response = await fetch(`${CONFIG.GOOGLE_SCRIPT_URL}?action=listPackets&status=${status}`);
-        const data = await response.json();
+        const data = await fetchAPI('listPackets', { status });
         return data.success ? data.packets : [];
     } catch (error) {
         console.error(`Error fetching ${status} packets:`, error);
@@ -164,8 +162,7 @@ async function loadPacket(packetId) {
     reviewView.style.display = 'none';
 
     try {
-        const response = await fetch(`${CONFIG.GOOGLE_SCRIPT_URL}?action=getPacket&id=${encodeURIComponent(packetId)}`);
-        const data = await response.json();
+        const data = await fetchAPI('getPacket', { id: packetId });
 
         if (data.success && data.packet) {
             currentPacket = data.packet;
@@ -319,8 +316,8 @@ function addInfoRequestItem() {
                         <select class="template-select" onchange="handleTemplateChange(this)">
                             <option value="">Select a template or choose Custom...</option>
                             ${infoRequestTemplates.templates.map(t =>
-                                `<option value="${t.id}" data-description="${escapeHtml(t.description)}" data-teams="${t.suggestedTeams.join(',')}">${escapeHtml(t.name)}</option>`
-                            ).join('')}
+        `<option value="${t.id}" data-description="${escapeHtml(t.description)}" data-teams="${t.suggestedTeams.join(',')}">${escapeHtml(t.name)}</option>`
+    ).join('')}
                         </select>
                     </div>
                 </div>
@@ -475,17 +472,10 @@ async function submitInfoRequests() {
         document.getElementById('submitInfoRequestBtn').disabled = true;
         document.getElementById('submitInfoRequestBtn').textContent = 'Sending...';
 
-        const response = await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify({
-                action: 'submitInfoRequest',
-                packetId: currentPacket.id,
-                infoRequests
-            })
+        const data = await fetchAPI('submitInfoRequest', {
+            packetId: currentPacket.id,
+            infoRequests
         });
-
-        const data = await response.json();
 
         if (data.success) {
             showSuccess('Information requests sent successfully!', 'Emails will be sent to the assigned team members.');
@@ -531,8 +521,8 @@ function addSubitemItem() {
                         <select class="subitem-template-select" onchange="handleSubitemTemplateChange(this)">
                             <option value="">Select a template or choose Custom...</option>
                             ${subitemTemplates.templates.map(t =>
-                                `<option value="${t.id}" data-description="${escapeHtml(t.description)}">${escapeHtml(t.name)}</option>`
-                            ).join('')}
+        `<option value="${t.id}" data-description="${escapeHtml(t.description)}">${escapeHtml(t.name)}</option>`
+    ).join('')}
                         </select>
                     </div>
                     <div class="item-field">
@@ -640,17 +630,10 @@ async function pushToMonday() {
         document.getElementById('pushToMondayBtn').disabled = true;
         document.getElementById('pushToMondayBtn').textContent = 'Pushing...';
 
-        const response = await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify({
-                action: 'approveAndPush',
-                packetId: currentPacket.id,
-                subitems
-            })
+        const data = await fetchAPI('approveAndPush', {
+            packetId: currentPacket.id,
+            subitems
         });
-
-        const data = await response.json();
 
         if (data.success) {
             const mondayLink = `${CONFIG.MONDAY_BOARD_URL}/pulses/${data.mondayItemId}`;
@@ -791,4 +774,30 @@ function getDefaultInfoRequestTemplates() {
             { id: "custom", name: "Custom request", description: "", suggestedTeams: [] }
         ]
     };
+}
+
+// ============================================
+// SHARED API HELPER
+// ============================================
+async function fetchAPI(action, payload = {}) {
+    if (!CONFIG.API_URL) {
+        throw new Error('API URL not configured');
+    }
+
+    const response = await fetch(CONFIG.API_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            action,
+            ...payload
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error(`API request failed: ${response.statusText}`);
+    }
+
+    return await response.json();
 }
