@@ -7,7 +7,7 @@
 // CONFIGURATION
 // ============================================
 const CONFIG = {
-    API_URL: 'https://n8n.repfitness.io/webhook-test/sustaining-api',
+    API_URL: 'https://n8n.repfitness.io/webhook/sustaining-api',
     MONDAY_BOARD_URL: 'https://rep-fitness.monday.com/boards/8281967707/views/200096331'
 };
 
@@ -800,4 +800,5 @@ async function fetchAPI(action, payload = {}) {
     }
 
     return await response.json();
+
 }
